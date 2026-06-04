@@ -1,0 +1,19 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-demo
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx.rule=Host(`${HOSTNAME}`)
+      - traefik.http.routers.nginx.entrypoints=web
+      - traefik.http.routers.nginx-https.tls=true
+      - traefik.http.routers.nginx-https.tls.certresolver=duckdns
+      - traefik.http.routers.nginx-https.entrypoints=websecure
+      - traefik.http.routers.nginx-https.rule=Host(`${HOSTNAME}`)
+    restart: unless-stopped
+
+networks:
+  frontend:
+    external: true    
