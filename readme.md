@@ -2,5 +2,5 @@
 
 необходимо создать сетку
 ``` bash
-docker create network frontend
+docker network create frontend
 ```
